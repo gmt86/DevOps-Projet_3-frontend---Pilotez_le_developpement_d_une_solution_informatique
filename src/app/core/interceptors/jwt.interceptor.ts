@@ -1,0 +1,43 @@
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { ErrorService } from '../services/error.service';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
+
+/**
+ * Intercepteur HTTP qui ajoute automatiquement le token JWT
+ * à chaque requête sortante vers le backend.
+ * Gère également les erreurs HTTP via ErrorService.
+ */
+export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
+  const errorService = inject(ErrorService);
+  const router = inject(Router);
+
+  // Récupérer le token stocké
+  const token = authService.getToken();
+
+  // Cloner la requête et ajouter le token si présent
+  let authReq = req;
+  if (token) {
+    authReq = req.clone({
+      headers: req.headers.set('Authorization', `Bearer ${token}`)
+    });
+  }
+
+  // Passer la requête et gérer les erreurs centralement
+  return next(authReq).pipe(
+    catchError((error) => {
+      const message = errorService.getErrorMessage(error);
+
+      if (error.status === 401) {
+        // Token invalide ou expiré — déconnexion automatique
+        authService.logout();
+        router.navigate(['/login']);
+      }
+
+      return throwError(() => new Error(message));
+    })
+  );
+};
