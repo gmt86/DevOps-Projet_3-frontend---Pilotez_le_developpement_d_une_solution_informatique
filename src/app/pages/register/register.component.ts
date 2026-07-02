@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, OnInit , ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserService } from '../../core/services/user.service';
 import { ErrorService } from '../../core/services/error.service';
@@ -15,7 +15,7 @@ import { RegisterRequest } from '../../models/auth.model';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule , RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
