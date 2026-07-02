@@ -37,7 +37,9 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
         router.navigate(['/login']);
       }
 
-      return throwError(() => new Error(message));
+      // On retransmet l'erreur originale sans la transformer
+      return throwError(() => error);
+      //return throwError(() => new Error(message));
     })
   );
 };

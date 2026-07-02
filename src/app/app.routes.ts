@@ -16,25 +16,17 @@ export const routes: Routes = [
 
   // Routes protégées
   {
-    path: '',
+    path: 'home',
     canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-      },
-      {
-        // path: 'home',
-        // loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
-      },
-      {
-        // path: 'espace-personnel',
-        // loadComponent: () => import('./pages/espace-personnel/espace-personnel.component').then(m => m.EspacePersonnelComponent)
-      }
-    ]
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+  },
+  {
+    path: 'espace-personnel',
+    canActivate: [AuthGuard],
+    loadComponent: () => import('./pages/espace-personnel/espace-personnel.component').then(m => m.EspacePersonnelComponent)
   },
 
   // Redirection par défaut
-  { path: '**', redirectTo: 'login' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },//redirection quand l'URL est exactement vide
+  { path: '**', redirectTo: 'login' }//correspond à toute URL inconnue.
 ];
