@@ -88,7 +88,8 @@
       📄 {{ uploadResult.nom }}
     </div>
     <p class="success-message">
-      Félicitations, ton fichier sera conservé chez nous pendant une semaine !
+      Félicitations, ton fichier sera conservé chez nous pendant 
+       {{ dureeConservation === 1 ? 'une journée' : dureeConservation + ' jours' }} !
     </p>
     <div class="link-container">
       <input

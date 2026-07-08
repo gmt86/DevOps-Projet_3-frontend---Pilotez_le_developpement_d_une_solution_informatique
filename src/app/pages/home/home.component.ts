@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -19,7 +19,7 @@ import { AuthService } from '../../core/services/auth.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit {      
 
   private fichierService = inject(FichierService);
   private errorService = inject(ErrorService);
@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
   private authService = inject(AuthService);
+  
+  private cdr = inject(ChangeDetectorRef);
 
   /** Formulaire d'upload */
   uploadForm: FormGroup = new FormGroup({});
@@ -48,6 +50,11 @@ export class HomeComponent implements OnInit {
 
   /** Indique si le formulaire a été soumis */
   submitted: boolean = false;
+
+   /** Indique la duree de conservation du fichier */
+  dureeConservation: number = 0 ;
+
+
 
   ngOnInit(): void {
     this.uploadForm = this.formBuilder.group({
@@ -89,12 +96,24 @@ export class HomeComponent implements OnInit {
 
     this.isLoading = true;
 
+    //lecture nombre de jour
+    const days = parseInt(this.form['dateExpiration'].value);
+    this.dureeConservation = days;
+
+    //calcul de la date d'expiration
+    const dateExpirationISO = this.calculateExpirationDate(days);
+
     const formData = new FormData();
+     
     formData.append('fichier', this.selectedFile);
-    formData.append('dateExpiration', this.form['dateExpiration'].value);
+
+    const requestJson: any = { dateExpiration: dateExpirationISO };
     if (this.form['password'].value) {
-      formData.append('password', this.form['password'].value);
+      requestJson['password'] = this.form['password'].value;
     }
+
+    const blob = new Blob([JSON.stringify(requestJson)], { type: 'application/json' });
+    formData.append('request', blob);
 
     this.fichierService.uploadFichier(formData)
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -102,14 +121,27 @@ export class HomeComponent implements OnInit {
         next: (response) => {
           this.uploadResult = response;
           this.isLoading = false;
+          this.cdr.markForCheck();// Force Angular à re-render le template pour soit afficher les messages
         },
         error: (error) => {
           this.errorMessage = this.errorService.getErrorMessage(error);
           this.isLoading = false;
+          this.cdr.markForCheck(); // Force Angular à re-render le template pour soit afficher les messages 
         }
       });
   }
 
+
+  /**
+ * Calcule la date d'expiration à partir du nombre de jours.
+ * @param days nombre de jours avant expiration
+ * @returns date d'expiration au format ISO 8601
+ */
+private calculateExpirationDate(days: number): string {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date.toISOString().slice(0, 19);//.slice(0, 19) coupe la chaîne aux 19 premiers caractères
+} 
 
   
   /**
