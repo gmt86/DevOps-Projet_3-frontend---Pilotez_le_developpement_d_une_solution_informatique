@@ -6,7 +6,7 @@ import { FichierService } from '../../core/services/fichier.service';
 import { ErrorService } from '../../core/services/error.service';
 import { FichierResponse } from '../../models/fichier.model';
 import { Router } from '@angular/router';
-import { HeaderComponent } from "../../shared/components/header/header.component";
+import { AuthService } from '../../core/services/auth.service';
 
 /**
  * Composant de la page d'accueil.
@@ -15,7 +15,7 @@ import { HeaderComponent } from "../../shared/components/header/header.component
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HeaderComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   /** Formulaire d'upload */
   uploadForm: FormGroup = new FormGroup({});
@@ -108,6 +109,20 @@ export class HomeComponent implements OnInit {
         }
       });
   }
+
+
+  
+  /**
+ * Affiche le formulaire si connecté, sinon redirige vers login.
+ */
+  showUploadForm(): void {
+    if (this.authService.isAuthenticated()) {
+      this.showForm = true;
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
 
   /**
    * Copie le lien de téléchargement dans le presse-papier.

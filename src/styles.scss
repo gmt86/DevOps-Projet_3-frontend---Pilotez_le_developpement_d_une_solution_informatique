@@ -33,13 +33,12 @@ body {
    COMPOSANTS RÉUTILISABLES
 =========================== */
 
-/* Fond gradient (partagé entre login, register, upload...) */
+/* Conteneur de page — centrage uniquement */
 .page-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5a393, #e8604a);
+  flex: 1;
 }
 
 /* Card blanche centrée */
