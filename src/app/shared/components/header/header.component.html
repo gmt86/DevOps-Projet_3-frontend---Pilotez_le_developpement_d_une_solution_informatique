@@ -1,0 +1,17 @@
+<!-- Header DataShare -->
+<header class="header">
+  <span class="header-logo">DataShare</span>
+
+  <!-- Non connecté -->
+  @if (!isAuthenticated()) {
+    <button class="btn-dark" routerLink="/login">Se connecter</button>
+  }
+
+  <!-- Connecté -->
+  @if (isAuthenticated()) {
+    <div class="header-actions">
+      <button class="btn-dark" routerLink="/espace-personnel">Mon espace</button>
+      <button class="btn-dark" (click)="logout()">Déconnexion</button>
+    </div>
+  }
+</header>

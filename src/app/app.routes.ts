@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 /**
@@ -13,13 +14,10 @@ export const routes: Routes = [
   // Routes publiques
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
 
   // Routes protégées
-  {
-    path: 'home',
-    canActivate: [AuthGuard],
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
-  },
+  
   {
     path: 'espace-personnel',
     canActivate: [AuthGuard],
