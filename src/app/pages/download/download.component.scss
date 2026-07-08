@@ -1,0 +1,18 @@
+/* Styles spécifiques à la page de téléchargement */
+
+.file-size {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-left: 0.5rem;
+}
+
+/* Callout info */
+.info-callout {
+  background: #e8f4fd;
+  border: 1px solid #3498db;
+  color: #2980b9;
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

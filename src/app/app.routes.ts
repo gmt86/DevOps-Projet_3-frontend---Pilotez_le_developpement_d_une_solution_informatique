@@ -34,6 +34,11 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         loadComponent: () => import('./pages/espace-personnel/espace-personnel.component').then(m => m.EspacePersonnelComponent)
       },
+      {
+        path: 'download/:token',
+        // canActivate: [AuthGuard], 
+        loadComponent: () => import('./pages/download/download.component').then(m => m.DownloadComponent)
+      },
 
       // Redirection par défaut
       { path: '', redirectTo: 'home', pathMatch: 'full' }

@@ -1,0 +1,56 @@
+<!-- Page de téléchargement DataShare -->
+
+<!-- Erreur — lien invalide ou expiré -->
+@if (errorMessage) {
+  <div class="card">
+    <h2>Télécharger un fichier</h2>
+    <div class="error-callout">{{ errorMessage }}</div>
+  </div>
+}
+
+<!-- Métadonnées du fichier -->
+@if (fichier && !errorMessage) {
+  <div class="card">
+    <h2>Télécharger un fichier</h2>
+
+    <!-- Infos fichier -->
+    <div class="file-info">
+      📄 {{ fichier.nom }}
+      <span class="file-size">{{ formatSize(fichier.taille) }}</span>
+    </div>
+
+    <!-- Expiration -->
+    @if (fichier.estExpire) {
+      <div class="error-callout">
+        Ce lien a expiré, il n'est plus disponible.
+      </div>
+    }
+
+    @if (!fichier.estExpire) {
+      <div class="info-callout">
+        Ce lien expire le {{ fichier.dateExpiration | date:'dd/MM/yyyy' }}
+      </div>
+
+      <!-- Mot de passe si protégé -->
+      @if (fichier.estProtege) {
+        <form [formGroup]="downloadForm">
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              placeholder="Saisissez le mot de passe"
+            />
+          </div>
+        </form>
+      }
+
+      <!-- Bouton télécharger -->
+      <button class="btn-primary" (click)="onDownload()" [disabled]="isLoading">
+        {{ isLoading ? 'Chargement...' : '⬇ Télécharger' }}
+      </button>
+    }
+
+  </div>
+}
