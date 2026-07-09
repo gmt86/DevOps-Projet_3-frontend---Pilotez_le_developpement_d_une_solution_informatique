@@ -31,8 +31,9 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error) => {
       const message = errorService.getErrorMessage(error);
 
-      if (error.status === 401) {
+      if (error.status === 401 && !req.url.includes('/download') ) {
         // Token invalide ou expiré — déconnexion automatique
+         // Déconnexion uniquement si ce n'est pas une erreur de mot de passe fichier
         authService.logout();
         router.navigate(['/login']);
       }

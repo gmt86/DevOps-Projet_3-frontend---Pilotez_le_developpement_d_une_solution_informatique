@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { FichierResponse, DownloadRequest } from '../../models/fichier.model';
 
 /**
@@ -35,10 +35,19 @@ export class FichierService {
    * Télécharge un fichier via son token.
    */
   downloadFichier(token: string, request: DownloadRequest): Observable<Blob> {
-    return this.http.post(`${this.API_URL}/${token}/download`, request, {
-      responseType: 'blob'
-    });
-  }
+  const params = request.password ? `?password=${request.password}` : '';
+  return this.http.post(`${this.API_URL}/${token}/download${params}`, null, {
+    responseType: 'blob',
+    observe: 'response'
+  }).pipe(
+    map(response => {
+      if (response.status === 200) {
+        return response.body as Blob;
+      }
+      throw response;
+    })
+  );
+}
 
   /**
    * Récupère l'historique des fichiers de l'utilisateur connecté.

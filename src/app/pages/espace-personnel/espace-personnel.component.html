@@ -32,8 +32,7 @@
 
       <div class="fichier-info">
         <span class="fichier-nom">
-          📄 {{ fichier.nom }}
-          @if (fichier.estProtege) { 🔒 }
+          📄 {{ fichier.nom }}          
         </span>
         <span class="fichier-statut" [class.expire]="fichier.estExpire">
           @if (fichier.estExpire) {
@@ -45,6 +44,9 @@
       </div>
 
       <div class="fichier-actions">
+        <span class="fichier-protege">         
+          @if (fichier.estProtege) { 🔒 }
+        </span>
         @if (!fichier.estExpire) {
           <button class="btn-danger" (click)="supprimerFichier(fichier.id)">
             <span class="btn-icon">🗑</span>  Supprimer
