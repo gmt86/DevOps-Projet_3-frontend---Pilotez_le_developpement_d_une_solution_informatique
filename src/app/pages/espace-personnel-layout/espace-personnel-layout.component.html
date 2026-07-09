@@ -1,0 +1,34 @@
+<!-- Layout Espace Personnel — Sidebar + Zone droite -->
+<div class="ep-layout">
+
+  <!-- Sidebar gauche -->
+  <aside class="ep-sidebar">
+    <span class="ep-logo">DataShare</span>
+
+    <nav class="ep-nav">
+      <a class="ep-nav-link active">Mes fichiers</a>
+    </nav>
+
+    <footer class="ep-footer">
+      <p>Copyright DataShare® {{ currentYear }}</p>
+    </footer>
+  </aside>
+
+  <!-- Zone droite -->
+  <div class="ep-right">
+
+    <!-- Header droit -->
+    <header class="ep-header">
+      <button class="btn-dark" routerLink="/home">Ajouter des fichiers</button>
+      <button class="btn-logout" (click)="logout()">
+        ← Déconnexion
+      </button>
+    </header>
+
+    <!-- Contenu -->
+    <main class="ep-content">
+      <router-outlet />
+    </main>
+
+  </div>
+</div>

@@ -1,0 +1,104 @@
+/* Layout Espace Personnel — deux colonnes */
+.ep-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar gauche */
+.ep-sidebar {
+  width: 200px;
+  background: linear-gradient(135deg, #f5a393, #e8604a);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+
+  /* Logo DataShare */
+  .ep-logo {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 2rem;
+  }
+
+  /* Navigation */
+  .ep-nav {
+    flex: 1;
+
+    .ep-nav-link {
+      display: block;
+      color: rgb(172, 18, 18);
+      padding: 0.6rem 1rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: none;
+       background: #ffeee3;
+      // background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  /* Footer copyright */
+  .ep-footer {
+    p {
+      color: white;
+      font-size: 0.75rem;
+      white-space: nowrap;  /* empêche le retour à la ligne */
+    }
+  }
+}
+
+/* Zone droite */
+.ep-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fdf5f3;
+}
+
+/* Header droit */
+.ep-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.5rem;
+  background: #ffeee3;
+  border-bottom: 1px solid #f0e0dc;
+}
+
+/* Contenu */
+.ep-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Bouton sombre */
+.btn-dark {
+  padding: 0.5rem 1rem;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #333;
+  }
+}
+
+/* Bouton déconnexion */
+.btn-logout {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  color: var(--color-text);
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
