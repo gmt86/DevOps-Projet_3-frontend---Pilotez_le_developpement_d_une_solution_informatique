@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit , ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -43,9 +43,21 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void { //Initialisation du formulaire
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]], //Validation intégrée dans le formulaire
-      password: ['', [Validators.required, Validators.minLength(8)]] //Validation intégrée dans le formulaire
-    });
+      password: ['', [Validators.required, Validators.minLength(8)]], //Validation intégrée dans le formulaire
+      confirmPassword: ['', [Validators.required]]
+    }, {
+    validators: this.passwordMatchValidator
+  });
   }
+
+  /**
+ * Validateur personnalisé — vérifie que les deux mots de passe correspondent.
+ */
+private passwordMatchValidator(form: AbstractControl) {
+  const password = form.get('password')?.value;
+  const confirmPassword = form.get('confirmPassword')?.value;
+  return password === confirmPassword ? null : { passwordMismatch: true };
+}
 
   /**
    * Raccourci pour accéder aux contrôles du formulaire dans le template.

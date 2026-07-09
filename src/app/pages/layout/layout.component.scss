@@ -7,9 +7,10 @@
 
 .layout-main {
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+   width: 100%;
 }
 
 .layout-footer {
@@ -17,4 +18,4 @@
   padding: 1rem 2rem;
   color: white;
   font-size: 0.8rem;
-}
+}     

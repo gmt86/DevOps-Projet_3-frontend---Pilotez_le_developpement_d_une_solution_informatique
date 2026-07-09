@@ -56,6 +56,28 @@
         }
       </div>
 
+      <!-- Confirmation mot de passe -->
+      <div class="form-group">
+        <label for="confirmPassword">Vérification du mot de passe</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Saisissez à nouveau le mot de passe"
+          [ngClass]="{ 'is-invalid': submitted && (form['confirmPassword'].errors || registerForm.errors?.['passwordMismatch']) }"
+        />
+        @if (submitted && form['confirmPassword'].errors?.['required']) {
+          <div class="invalid-feedback">
+            <div>La confirmation du mot de passe est requise.</div>
+          </div>
+        }
+        @if (submitted && registerForm.errors?.['passwordMismatch']) {
+          <div class="invalid-feedback">
+            <div>Les mots de passe ne correspondent pas.</div>
+          </div>
+        }
+      </div>
+
       <!-- Lien vers login -->
       <a routerLink="/login" class="link">J'ai déjà un compte</a>
 
