@@ -162,3 +162,22 @@ select {
     border-color: var(--color-primary);
   }
 }
+
+
+@media (max-width: 430px) {
+  .page-container {
+     align-items: flex-end;
+    // min-height: calc(100vh - 80px);
+    padding: 0;
+    
+  }
+
+  .card {
+    border-radius: var(--border-radius-card) var(--border-radius-card) 0 0;
+    max-width: 100%;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+}

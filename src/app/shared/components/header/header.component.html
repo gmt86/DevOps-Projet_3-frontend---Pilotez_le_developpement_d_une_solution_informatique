@@ -7,7 +7,7 @@
 
   @if (isAuthenticated()) {
     <div class="header-actions">
-      <button class="btn-dark" routerLink="/espace-personnel">Mon espace</button>
+      <button class="btn-dark hide-mobile" routerLink="/espace-personnel">Mon espace</button>
       <button class="btn-dark" (click)="logout()">Déconnexion</button>
     </div>
   }

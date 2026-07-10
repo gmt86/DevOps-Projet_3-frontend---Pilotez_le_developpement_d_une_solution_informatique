@@ -2,7 +2,7 @@
 
 <!-- État initial — bouton upload -->
 @if (!showForm && !uploadResult) {
-  <div class="upload-trigger">
+  <div class="upload-trigger center-always">
     <p>Tu veux partager un fichier ?</p>
     <button class="btn-upload" (click)="showUploadForm()">
       <span class="upload-icon">⬆</span>
@@ -15,11 +15,7 @@
   <div class="page-container">
     <div class="card">
       <h2>Ajouter un fichier</h2>
-
-      @if (errorMessage) {
-        <div class="error-callout">{{ errorMessage }}</div>
-      }
-
+     
       <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
 
         <!-- Sélection du fichier -->
@@ -83,7 +79,7 @@
         </div>
 
         <!-- Bouton upload -->
-        <button type="submit" class="btn-primary" [disabled]="isLoading">
+        <button type="submit" class="btn-primary btn-upload-submit" [disabled]="isLoading">
           {{ isLoading ? 'Chargement...' : '⬆ Téléverser' }}
         </button>
 
