@@ -1,28 +1,46 @@
-<!-- Layout Espace Personnel — Sidebar + Zone droite -->
+<!-- Layout Espace Personnel -->
 <div class="ep-layout">
 
-  <!-- Sidebar gauche -->
-  <aside class="ep-sidebar">
-    <span class="ep-logo">DataShare</span>
+  <!-- Sidebar gauche — desktop -->
+  <aside class="ep-sidebar" [class.open]="sidebarOpen">
 
-    <nav class="ep-nav">
-      <a class="ep-nav-link active">Mes fichiers</a>
-    </nav>
+    <!-- Overlay fermeture mobile -->
+    <div class="ep-overlay" (click)="closeSidebar()"></div>
 
-    <footer class="ep-footer">
-      <p>Copyright DataShare® {{ currentYear }}</p>
-    </footer>
+    <div class="ep-sidebar-content">
+      <div class="ep-sidebar-header">  
+         <span class="ep-logo">DataShare</span>      
+        <button class="ep-close" (click)="closeSidebar()">✕</button>       
+      </div>
+
+      <nav class="ep-nav">
+        <a class="ep-nav-link active" (click)="closeSidebar()">Mes fichiers</a>
+      </nav>
+
+      <footer class="ep-footer">
+        <p>Copyright DataShare® {{ currentYear }}</p>
+      </footer>
+    </div>
   </aside>
 
   <!-- Zone droite -->
   <div class="ep-right">
 
-    <!-- Header droit -->
-    <header class="ep-header">
+    <!-- Header desktop -->
+    <header class="ep-header ep-header-desktop">
       <button class="btn-dark" routerLink="/home">Ajouter des fichiers</button>
-      <button class="btn-logout" (click)="logout()">
-        ← Déconnexion
+      <button class="btn-logout" (click)="logout()">← Déconnexion</button>
+    </header>
+
+    <!-- Header mobile -->
+    <header class="ep-header ep-header-mobile">
+      <button class="ep-hamburger" (click)="toggleSidebar()">
+        {{ sidebarOpen ? '✕' : '☰' }}
       </button>
+      <div class="ep-user">
+        <span class="ep-username">{{ getUserName() }}</span>
+        <div class="ep-avatar">{{ getUserInitial() }}</div>
+      </div>
     </header>
 
     <!-- Contenu -->

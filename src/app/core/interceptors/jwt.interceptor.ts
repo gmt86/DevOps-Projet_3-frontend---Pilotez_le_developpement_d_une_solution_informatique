@@ -17,6 +17,9 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   // Récupérer le token stocké
   const token = authService.getToken();
+  console.log('Token:', token);
+  console.log('Request URL:', req.url);
+  console.log('Request method:', req.method);
 
   // Cloner la requête et ajouter le token si présent
   let authReq = req;

@@ -37,6 +37,10 @@ export class EspacePersonnelComponent implements OnInit {
   /** Indicateur de chargement */
   isLoading: boolean = true;
 
+  /** ID du fichier dont le menu est ouvert */
+   menuOuvertId: string | null = null;
+
+
   ngOnInit(): void {
     this.loadFichiers();
   }
@@ -114,4 +118,18 @@ export class EspacePersonnelComponent implements OnInit {
   formatSize(bytes: number): string {
     return (bytes / 1024 / 1024).toFixed(2) + ' Mo';
   }
+
+  /**
+ * Ouvre/ferme le menu d'actions d'un fichier.
+ */
+    toggleMenu(id: string): void {
+      this.menuOuvertId = this.menuOuvertId === id ? null : id;
+    }
+
+    /**
+     * Ferme tous les menus.
+     */
+    fermerMenus(): void {
+      this.menuOuvertId = null;
+    }
 }

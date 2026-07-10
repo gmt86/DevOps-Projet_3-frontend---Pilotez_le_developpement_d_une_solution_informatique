@@ -58,4 +58,31 @@ export class AuthService {
   getRedirectUrl(): string | null {
     return localStorage.getItem(this.REDIRECT_URL_KEY);
   }
+
+  /**
+ * Extrait l'email depuis le token JWT.
+ */
+getEmail(): string | null {
+  const token = this.getToken();
+  if (!token) return null;
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  return payload.sub;
+}
+
+/**
+ * Retourne la partie avant @ de l'email.
+ */
+getUserName(): string {
+  const email = this.getEmail();
+  return email ? email.split('@')[0] : '';
+}
+
+/**
+ * Retourne l'initiale de l'utilisateur.
+ */
+getUserInitial(): string {
+  const userName = this.getUserName();
+  return userName ? userName[0].toUpperCase() : '?';
+}
+
 }

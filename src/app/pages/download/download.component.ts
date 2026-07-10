@@ -91,7 +91,7 @@ export class DownloadComponent implements OnInit {
           const a = document.createElement('a');
           a.href = url;
           a.download = this.fichier?.nom || 'fichier';
-          a.click();
+          a.click();  
           URL.revokeObjectURL(url);
           this.isLoading = false;
           this.cdr.markForCheck();
