@@ -22,25 +22,37 @@
 
       <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
 
+        <!-- Sélection du fichier -->
         <div class="form-group">
-          <input
-            id="fichier"
-            type="file"
-            (change)="onFileSelected($event)"
-            [class.is-invalid]="submitted && !selectedFile"
-          />
+          <div class="file-selector" [class.is-invalid]="submitted && !selectedFile">
+            <span class="file-label">
+              @if (selectedFile) {
+                📄 {{ selectedFile.name }}
+              } @else {
+                Aucun fichier sélectionné
+              }
+            </span>
+            <label for="fichier" class="btn-changer">Changer</label>
+            <input
+              id="fichier"
+              type="file"
+              (change)="onFileSelected($event)"
+              hidden
+            />
+          </div>
+          @if (selectedFile) {
+            <div class="file-size">
+              {{ (selectedFile.size / 1024 / 1024).toFixed(2) }} Mo
+            </div>
+          }
           @if (submitted && !selectedFile) {
             <div class="invalid-feedback">
               <div>Veuillez sélectionner un fichier.</div>
             </div>
           }
-          @if (selectedFile) {
-            <div class="file-info">
-              📄 {{ selectedFile.name }} — {{ (selectedFile.size / 1024 / 1024).toFixed(2) }} Mo
-            </div>
-          }
         </div>
 
+        <!-- Mot de passe optionnel -->
         <div class="form-group">
           <input
             id="password"
@@ -50,6 +62,7 @@
           />
         </div>
 
+        <!-- Date d'expiration -->
         <div class="form-group">
           <select formControlName="dateExpiration"
             [ngClass]="{ 'is-invalid': submitted && form['dateExpiration'].errors }">
@@ -69,6 +82,7 @@
           }
         </div>
 
+        <!-- Bouton upload -->
         <button type="submit" class="btn-primary" [disabled]="isLoading">
           {{ isLoading ? 'Chargement...' : '⬆ Téléverser' }}
         </button>

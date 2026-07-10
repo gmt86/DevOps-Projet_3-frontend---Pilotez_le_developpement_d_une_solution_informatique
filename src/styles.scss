@@ -143,3 +143,22 @@ body {
     text-decoration: underline;
   }
 }
+
+select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  background: white;
+  cursor: pointer;
+
+  &.is-invalid {
+    border-color: var(--color-error);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+}

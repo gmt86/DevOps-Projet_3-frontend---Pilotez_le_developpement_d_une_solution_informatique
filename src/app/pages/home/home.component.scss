@@ -68,6 +68,43 @@
   }
 }
 
+
+
+/* Sélecteur de fichier */
+.file-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0rem; 
+  background: transparent;
+  border: none;
+}
+
+.file-label {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-changer {
+  padding: 0.3rem 0.8rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--border-radius);
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.file-size {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-top: 0.3rem;
+}
+
 /* Footer */
 .home-footer {
   text-align: left;
