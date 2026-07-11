@@ -1,54 +1,46 @@
 <!-- Page de téléchargement DataShare -->
-<div class="page-container">
 
-  <!-- Erreur — lien invalide ou expiré -->
-  @if (errorMessage) {
-    <div class="card">
-      <h2>Télécharger un fichier</h2>
-      <div class="error-callout">{{ errorMessage }}</div>
+@if (errorMessage) {
+  <app-card title="Télécharger un fichier" [errorMessage]="errorMessage" />
+}
+
+@if (fichier && !errorMessage) {
+  <app-card title="Télécharger un fichier">
+
+    <div class="file-info">
+      📄 {{ fichier.nom }}
+      <span class="file-size">{{ formatSize(fichier.taille) }}</span>
     </div>
-  }
 
-  <!-- Métadonnées du fichier -->
-  @if (fichier && !errorMessage) {
-    <div class="card">
-      <h2>Télécharger un fichier</h2>
+    @if (fichier.estExpire) {
+      <div class="error-callout">
+        Ce lien a expiré, il n'est plus disponible.
+      </div>
+    }
 
-      <div class="file-info">
-        📄 {{ fichier.nom }}
-        <span class="file-size">{{ formatSize(fichier.taille) }}</span>
+    @if (!fichier.estExpire) {
+      <div class="info-callout">
+        Ce lien expire le {{ fichier.dateExpiration | date:'dd/MM/yyyy' }}
       </div>
 
-      @if (fichier.estExpire) {
-        <div class="error-callout">
-          Ce lien a expiré, il n'est plus disponible.
-        </div>
+      @if (fichier.estProtege) {
+        <form [formGroup]="downloadForm">
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              placeholder="Saisissez le mot de passe"
+            />
+          </div>
+        </form>
       }
 
-      @if (!fichier.estExpire) {
-        <div class="info-callout">
-          Ce lien expire le {{ fichier.dateExpiration | date:'dd/MM/yyyy' }}
-        </div>
+      <button class="btn-primary" (click)="onDownload()" [disabled]="isLoading">
+        {{ isLoading ? 'Chargement...' : '⬇ Télécharger' }}
+      </button>
+    }
 
-        @if (fichier.estProtege) {
-          <form [formGroup]="downloadForm">
-            <div class="form-group">
-              <label for="password">Mot de passe</label>
-              <input
-                id="password"
-                type="password"
-                formControlName="password"
-                placeholder="Saisissez le mot de passe"
-              />
-            </div>
-          </form>
-        }
-
-        <button class="btn-primary" (click)="onDownload()" [disabled]="isLoading">
-          {{ isLoading ? 'Chargement...' : '⬇ Télécharger' }}
-        </button>
-      }
-    </div>
-  }
-
-</div>
+  </app-card>
+}

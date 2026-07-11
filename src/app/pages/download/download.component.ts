@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FichierService } from '../../core/services/fichier.service';
 import { ErrorService } from '../../core/services/error.service';
 import { FichierResponse } from '../../models/fichier.model';
+import { CardComponent } from "../../shared/components/card/card.component";
 
 /**
  * Composant de la page de téléchargement.
@@ -15,7 +16,7 @@ import { FichierResponse } from '../../models/fichier.model';
 @Component({
   selector: 'app-download',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CardComponent],
   templateUrl: './download.component.html',
   styleUrl: './download.component.scss'
 })

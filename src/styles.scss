@@ -182,3 +182,45 @@ select {
     display: none;
   }
 }
+
+/* Taille fichier */
+.file-size {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-top: 0.3rem;
+}
+
+/* Callout info */
+.info-callout {
+  background: #e8f4fd;
+  border: 1px solid #3498db;
+  color: #2980b9;
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Conteneur du lien */
+.link-container {
+  margin-bottom: 1rem;
+
+  .link-input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    background: #f9f9f9;
+    box-sizing: border-box;
+  }
+}
+
+/* Message de succès */
+.success-message {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
+  text-align: center;
+}

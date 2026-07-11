@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserService } from '../../core/services/user.service';
 import { ErrorService } from '../../core/services/error.service';
 import { LoginRequest } from '../../models/auth.model';
+import { CardComponent } from "../../shared/components/card/card.component";
 
 /**
  * Composant de la page de connexion.
@@ -15,7 +16,7 @@ import { LoginRequest } from '../../models/auth.model';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule , RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, CardComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

@@ -7,6 +7,7 @@ import { ErrorService } from '../../core/services/error.service';
 import { FichierResponse } from '../../models/fichier.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { CardComponent } from "../../shared/components/card/card.component";
 
 /**
  * Composant de la page d'accueil.
@@ -15,7 +16,7 @@ import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, CardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
