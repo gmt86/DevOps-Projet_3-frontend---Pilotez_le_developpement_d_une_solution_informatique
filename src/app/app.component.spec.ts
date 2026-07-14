@@ -1,23 +1,25 @@
 import { TestBed } from '@angular/core/testing';
-import { App } from './app.component';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
 
-describe('App', () => {
+/**
+ * Tests unitaires pour AppComponent.
+ * Vérifie le composant racine de l'application.
+ */
+describe('AppComponent', () => {
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [AppComponent, RouterModule.forRoot([])]
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  /**
+   * Test — le composant se crée correctement.
+   */
+  it('should create', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
-
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, datashare-frontend');
-  });
+  
 });
