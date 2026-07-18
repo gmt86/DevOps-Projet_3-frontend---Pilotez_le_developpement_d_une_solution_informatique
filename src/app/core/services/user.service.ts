@@ -21,12 +21,11 @@ export class UserService {
   ) {}
 
   /**
-   * Inscrit un nouvel utilisateur et stocke le token JWT reçu.
-   */
-  register(request: RegisterRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>('/api/auth/register', request).pipe(
-      tap(response => this.authService.storeToken(response.accessToken))
-    );
+ * Inscrit un nouvel utilisateur.
+ * Ne stocke pas de token — l'utilisateur doit se connecter après.
+ */
+  register(request: RegisterRequest): Observable<any> {
+    return this.http.post<any>('/api/auth/register', request);
   }
 
   /**

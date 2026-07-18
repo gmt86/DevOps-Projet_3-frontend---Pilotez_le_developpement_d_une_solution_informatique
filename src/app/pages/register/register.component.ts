@@ -90,7 +90,7 @@ private passwordMatchValidator(form: AbstractControl) {
       .pipe(takeUntilDestroyed(this.destroyRef))//Évite les fuites mémoire en désabonnant automatiquement
       .subscribe({
         next: () => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/login']);
         },
         error: (error) => {          
           this.errorMessage = this.errorService.getErrorMessage(error);
