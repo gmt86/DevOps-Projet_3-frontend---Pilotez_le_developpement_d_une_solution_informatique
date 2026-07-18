@@ -16,7 +16,7 @@ describe('Authentification', () => {
     cy.get('#password').type(password);
     cy.get('#confirmPassword').type(password);
     cy.get('button[type="submit"]').click();
-    cy.url().should('include', '/home');
+    cy.url().should('include', '/login');
   });
 
   /**
